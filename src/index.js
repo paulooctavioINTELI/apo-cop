@@ -60,7 +60,13 @@ client.on('resume', () => console.log('Bot connection resumed.'));
 client.on('error', (error) => console.error('Discord client error:', error));
 client.on('warn', (info) => console.warn('Discord client warn:', info));
 
-client.login(config.token).catch(console.error);
+// Tente fazer login no Discord
+console.log('Attempting to log in...');
+client.login(config.token).then(() => {
+  console.log('Login successful.');
+}).catch((error) => {
+  console.error('Error logging in:', error);
+});
 
 // Servidor HTTP básico
 app.get('/', (req, res) => res.send('Bot is running!'));
