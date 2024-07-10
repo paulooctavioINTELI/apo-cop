@@ -1,3 +1,7 @@
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 3000;
+
 const client = require('./bot');
 const config = require('./config');
 const voiceStateService = require('./services/voiceStateService');
@@ -36,3 +40,10 @@ client.on('interactionCreate', async interaction => {
 });
 
 client.login(config.token);
+
+// Servidor HTTP básico
+app.get('/', (req, res) => res.send('Bot is running!'));
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
