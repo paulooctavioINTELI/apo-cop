@@ -18,13 +18,23 @@ client.once('ready', () => {
   cron.schedule('59 23 * * *', () => {
     reportService.sendDailySummary();
   });
+  
+  // Verificação periódica para garantir que o bot está online
+  cron.schedule('*/5 * * * *', () => {
+    if (!client.isReady()) {
+      console.log('Bot is not ready, attempting to reconnect...');
+      client.login(config.token).catch(console.error);
+    }
+  });
 });
 
 client.on('voiceStateUpdate', (oldState, newState) => {
+  console.log('voiceStateUpdate detected');
   voiceStateService.handleVoiceStateUpdate(oldState, newState);
 });
 
 client.on('interactionCreate', async interaction => {
+  console.log('interactionCreate detected');
   if (!interaction.isCommand()) return;
 
   const command = client.commands.get(interaction.commandName);
@@ -39,7 +49,18 @@ client.on('interactionCreate', async interaction => {
   }
 });
 
-client.login(config.token);
+client.on('disconnect', () => {
+  console.log('Bot disconnected. Attempting to reconnect...');
+  client.login(config.token).catch(console.error);
+});
+
+// Log events to check the state
+client.on('reconnecting', () => console.log('Bot reconnecting...'));
+client.on('resume', () => console.log('Bot connection resumed.'));
+client.on('error', (error) => console.error('Discord client error:', error));
+client.on('warn', (info) => console.warn('Discord client warn:', info));
+
+client.login(config.token).catch(console.error);
 
 // Servidor HTTP básico
 app.get('/', (req, res) => res.send('Bot is running!'));
