@@ -98,63 +98,6 @@ Arquivo que contém as variáveis de ambiente necessárias para a configuração
 
 Arquivo que contém as informações do projeto e suas dependências. Também define os scripts para iniciar o bot.
 
-## Executando o Bot no Render
-
-### Passo 1: Preparar o Projeto
-
-1. Inicialize o repositório Git (se ainda não tiver):
-
-```sh
-git init
-```
-
-2. Adicione todos os arquivos ao repositório:
-
-```sh
-git add .
-```
-
-3. Faça um commit inicial:
-
-```sh
-git commit -m "Initial commit"
-```
-
-4. Crie um repositório no GitHub e conecte-o ao seu repositório local:
-
-```sh
-git remote add origin https://github.com/seu-usuario/seu-repositorio.git
-git push -u origin master
-```
-
-### Passo 2: Configurar o Render
-
-1. Acesse o [Render](https://render.com/) e crie uma conta ou faça login.
-
-2. Crie um novo serviço:
-   - Vá para o painel do Render e clique em **New +**.
-   - Selecione **Web Service**.
-
-3. Conecte o repositório do GitHub:
-   - Selecione o repositório que você configurou anteriormente.
-
-4. Configure o serviço:
-   - **Name**: Dê um nome ao seu serviço.
-   - **Root Directory**: Se o `package.json` estiver na raiz do repositório, deixe em branco.
-   - **Environment**: Selecione `Node`.
-   - **Build Command**: Deixe em branco ou use `npm install`.
-   - **Start Command**: Use `npm start`.
-
-5. Configurar variáveis de ambiente:
-   - Adicione as variáveis de ambiente do seu arquivo `.env` na seção **Environment** no painel do Render.
-
-6. Deploy:
-   - Clique em **Create Web Service** e o Render iniciará o processo de build e deploy do seu bot.
-
-### Passo 3: Verificar o Deploy
-
-Após o Render concluir o deploy, verifique os logs para garantir que o bot foi iniciado corretamente e que não há erros. O bot deve aparecer como online no Discord.
-
 ## Licença
 
 Este projeto está licenciado sob a MIT License. Veja o arquivo `LICENSE` para mais detalhes.
