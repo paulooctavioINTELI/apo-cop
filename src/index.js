@@ -8,6 +8,13 @@ const voiceStateService = require('./services/voiceStateService');
 const ReportService = require('./services/reportService');
 const cron = require('node-cron');
 
+// Verificação das variáveis de ambiente
+console.log('Config values:');
+console.log('TOKEN:', config.token ? 'exists' : 'not found');
+console.log('CLIENT_ID:', config.clientId ? 'exists' : 'not found');
+console.log('GUILD_ID:', config.guildId ? 'exists' : 'not found');
+console.log('CHANNEL_ID:', config.channelId ? 'exists' : 'not found');
+
 // Inicialize o serviço de relatório com o cliente e o serviço de estado de voz
 const reportService = new ReportService(voiceStateService, client);
 
