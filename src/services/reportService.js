@@ -54,7 +54,7 @@ class ReportService {
         if (!isFinalSummary && data.online) {
           totalTime += this.voiceStateService.getCurrentTimeInCall(userId, channelId);
         }
-        const timeInMinutes = Math.floor((totalTime || 0) / 1000);
+        const timeInMinutes = Math.floor((totalTime || 0) / 60000);
         userTotalTime += timeInMinutes;
         return `  Canal <#${channelId}>: ${timeInMinutes} minutos\n`;
       }).join('');
